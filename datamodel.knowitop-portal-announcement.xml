@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<itop_design xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.3">
+  <constants>
+  </constants>
+  <classes>
+    <class id="Announcement" _delta="define">
+      <parent>cmdbAbstractObject</parent>
+      <properties>
+        <comment/>
+        <category>bizmodel,searchable,structure</category>
+        <abstract>false</abstract>
+        <key_type>autoincrement</key_type>
+        <db_table>announcement</db_table>
+        <db_key_field>id</db_key_field>
+        <db_final_class_field/>
+        <naming>
+          <format>%1$s</format>
+          <attributes>
+            <attribute id="title"/>
+          </attributes>
+        </naming>
+        <display_template/>
+        <icon/>
+        <reconciliation>
+          <attributes>
+            <attribute id="title"/>
+          </attributes>
+        </reconciliation>
+      </properties>
+      <fields>
+        <field id="org_id" xsi:type="AttributeExternalKey">
+          <sql>org_id</sql>
+          <target_class>Organization</target_class>
+          <is_null_allowed>false</is_null_allowed>
+          <on_target_delete>DEL_AUTO</on_target_delete>
+        </field>
+        <field id="org_name" xsi:type="AttributeExternalField">
+          <extkey_attcode>org_id</extkey_attcode>
+          <target_attcode>name</target_attcode>
+        </field>
+        <field id="title" xsi:type="AttributeString">
+          <sql>title</sql>
+          <default_value/>
+          <is_null_allowed>false</is_null_allowed>
+        </field>
+        <field id="description" xsi:type="AttributeText">
+          <sql>description</sql>
+          <default_value/>
+          <is_null_allowed>false</is_null_allowed>
+        </field>
+        <field id="start_date" xsi:type="AttributeDateTime">
+          <always_load_in_tables>true</always_load_in_tables>
+          <sql>start_date</sql>
+          <default_value/>
+          <is_null_allowed>true</is_null_allowed>
+        </field>
+        <field id="end_date" xsi:type="AttributeDateTime">
+          <sql>end_date</sql>
+          <default_value/>
+          <is_null_allowed>true</is_null_allowed>
+        </field>
+        <field id="status" xsi:type="AttributeEnum">
+          <values>
+            <value>active</value>
+            <value>inactive</value>
+          </values>
+          <sql>status</sql>
+          <default_value>active</default_value>
+          <is_null_allowed>false</is_null_allowed>
+          <display_style>radio_vertical</display_style>
+        </field>
+        <field id="message_type" xsi:type="AttributeEnum">
+          <values>
+            <value>message_info</value>
+            <value>message_ok</value>
+            <value>message_warning</value>
+            <value>message_error</value>
+          </values>
+          <sql>message_type</sql>
+          <default_value>message_info</default_value>
+          <is_null_allowed>false</is_null_allowed>
+          <display_style>radio_vertical</display_style>
+        </field>
+        <field id="customers_list" xsi:type="AttributeLinkedSetIndirect">
+          <linked_class>lnkAnnouncementToCustomer</linked_class>
+          <ext_key_to_me>announcement_id</ext_key_to_me>
+          <count_min>0</count_min>
+          <count_max>0</count_max>
+          <ext_key_to_remote>customer_org_id</ext_key_to_remote>
+          <duplicates/>
+        </field>
+      </fields>
+      <presentation>
+        <details>
+          <items>
+            <item id="org_id">
+              <rank>10</rank>
+            </item>
+            <item id="status">
+              <rank>20</rank>
+            </item>
+            <item id="title">
+              <rank>30</rank>
+            </item>
+            <item id="description">
+              <rank>40</rank>
+            </item>
+            <item id="start_date">
+              <rank>50</rank>
+            </item>
+            <item id="end_date">
+              <rank>60</rank>
+            </item>
+            <item id="message_type">
+              <rank>70</rank>
+            </item>
+            <item id="customers_list">
+              <rank>60</rank>
+            </item>
+          </items>
+        </details>
+        <search>
+          <items>
+            <item id="org_id">
+              <rank>10</rank>
+            </item>
+            <item id="status">
+              <rank>15</rank>
+            </item>
+            <item id="title">
+              <rank>20</rank>
+            </item>
+            <item id="start_date">
+              <rank>40</rank>
+            </item>
+            <item id="end_date">
+              <rank>50</rank>
+            </item>
+            <item id="message_type">
+              <rank>60</rank>
+            </item>
+          </items>
+        </search>
+        <list>
+          <items>
+            <item id="org_id">
+              <rank>10</rank>
+            </item>
+            <item id="title">
+              <rank>20</rank>
+            </item>
+            <item id="start_date">
+              <rank>40</rank>
+            </item>
+            <item id="end_date">
+              <rank>50</rank>
+            </item>
+            <item id="message_type">
+              <rank>60</rank>
+            </item>
+            <item id="status">
+              <rank>70</rank>
+            </item>
+          </items>
+        </list>
+      </presentation>
+      <methods/>
+    </class>
+    <class id="lnkAnnouncementToCustomer" _delta="define">
+      <parent>cmdbAbstractObject</parent>
+      <properties>
+        <is_link>1</is_link>
+        <category>bizmodel</category>
+        <abstract>false</abstract>
+        <key_type>autoincrement</key_type>
+        <db_table>lnkannouncementtocustomer</db_table>
+        <db_key_field>id</db_key_field>
+        <db_final_class_field/>
+        <naming>
+          <format>%1$s %2$s</format>
+          <attributes>
+            <attribute id="announcement_id"/>
+            <attribute id="customer_org_id"/>
+          </attributes>
+        </naming>
+        <display_template/>
+        <icon/>
+        <reconciliation>
+          <attributes>
+            <attribute id="announcement_id"/>
+            <attribute id="customer_org_id"/>
+          </attributes>
+        </reconciliation>
+      </properties>
+      <fields>
+        <field id="announcement_id" xsi:type="AttributeExternalKey">
+          <sql>announcement_id</sql>
+          <target_class>Announcement</target_class>
+          <is_null_allowed>false</is_null_allowed>
+          <on_target_delete>DEL_AUTO</on_target_delete>
+        </field>
+        <field id="announcement_name" xsi:type="AttributeExternalField">
+          <extkey_attcode>announcement_id</extkey_attcode>
+          <target_attcode>title</target_attcode>
+        </field>
+        <field id="customer_org_id" xsi:type="AttributeExternalKey">
+          <sql>customer_org_id</sql>
+          <target_class>Organization</target_class>
+          <is_null_allowed>false</is_null_allowed>
+          <on_target_delete>DEL_AUTO</on_target_delete>
+        </field>
+        <field id="customer_org_name" xsi:type="AttributeExternalField">
+          <extkey_attcode>customer_org_id</extkey_attcode>
+          <target_attcode>name</target_attcode>
+        </field>
+      </fields>
+      <methods/>
+      <presentation>
+        <details>
+          <items>
+            <item id="announcement_id">
+              <rank>10</rank>
+            </item>
+            <item id="customer_org_id">
+              <rank>20</rank>
+            </item>
+          </items>
+        </details>
+        <search>
+          <items>
+            <item id="announcement_id">
+              <rank>10</rank>
+            </item>
+            <item id="customer_org_id">
+              <rank>20</rank>
+            </item>
+          </items>
+        </search>
+        <list>
+          <items>
+            <item id="announcement_id">
+              <rank>10</rank>
+            </item>
+            <item id="customer_org_id">
+              <rank>20</rank>
+            </item>
+          </items>
+        </list>
+      </presentation>
+    </class>
+  </classes>
+  <menus>
+    <menu id="NewAnnouncement" xsi:type="NewObjectMenuNode" _delta="define">
+      <rank>97</rank>
+      <parent>RequestManagement</parent>
+      <class>Announcement</class>
+    </menu>
+    <menu id="ActiveAnnouncements" xsi:type="OQLMenuNode" _delta="define">
+      <rank>98</rank>
+      <parent>RequestManagement</parent>
+      <oql><![CDATA[SELECT Announcement AS a JOIN lnkAnnouncementToCustomer AS lnk ON lnk.announcement_id = a.id WHERE (a.start_date <= NOW() OR ISNULL(a.start_date)) AND (a.end_date >= NOW() OR ISNULL(a.end_date)) AND a.status = 'active']]></oql>
+      <do_search>1</do_search>
+      <auto_reload>standard</auto_reload>
+    </menu>
+    <menu id="AllAnnouncements" xsi:type="OQLMenuNode" _delta="define">
+      <rank>99</rank>
+      <parent>RequestManagement</parent>
+      <oql><![CDATA[SELECT Announcement]]></oql>
+      <do_search>1</do_search>
+    </menu>
+  </menus>
+  <user_rights>
+    <groups>
+      <group id="Call">
+        <classes>
+          <class id="Announcement" _delta="define"/>
+          <class id="lnkAnnouncementToCustomer" _delta="define"/>
+        </classes>
+      </group>
+    </groups>
+    <profiles>
+    </profiles>
+  </user_rights>
+  <module_designs>
+    <module_design id="itop-portal">
+      <properties>
+        <themes>
+          <theme id="custom" _delta="define">knowitop-portal-announcement/portal/css/style.css</theme>
+        </themes>
+      </properties>
+      <bricks>
+        <brick id="announcements-show" xsi:type="Knowitop\Portal\Brick\AnnouncementBrick" _delta="define">
+          <active>true</active>
+          <rank>
+            <home>-100</home>
+          </rank>
+          <oql><![CDATA[SELECT Announcement AS a WHERE (a.start_date <= NOW() OR ISNULL(a.start_date)) AND (a.end_date >= NOW() OR ISNULL(a.end_date)) AND a.status = 'active']]></oql>
+        </brick>
+        <brick id="announcements-history" xsi:type="Combodo\iTop\Portal\Brick\ManageBrick" _delta="define">
+          <active>true</active>
+          <rank>
+            <navigation_menu>100</navigation_menu>
+          </rank>
+          <visible>
+            <home>false</home>
+            <navigation_menu>true</navigation_menu>
+          </visible>
+          <width>6</width>
+          <title>
+            <default>Brick:Portal:Announcements:Title</default>
+          </title>
+          <description>Brick:Portal:Announcements:Description</description>
+          <decoration_class>
+            <default>fa fa-bullhorn fa-2x</default>
+          </decoration_class>
+          <oql><![CDATA[SELECT Announcement]]></oql>
+          <fields>
+            <field id="description"/>
+            <!--<field id="start_date"/>-->
+            <!--<field id="end_date"/>-->
+            <!--<field id="status"/>-->
+          </fields>
+          <grouping>
+            <tabs>
+              <groups>
+                <group id="active">
+                  <rank>1</rank>
+                  <title>Brick:Portal:Announcements:Tab:Active</title>
+                  <condition><![CDATA[SELECT Announcement WHERE (start_date <= NOW() OR ISNULL(start_date)) AND (end_date >= NOW() OR ISNULL(end_date)) AND status = 'active']]></condition>
+                </group>
+                <group id="inactive">
+                  <rank>2</rank>
+                  <title>Brick:Portal:Announcements:Tab:Inactive</title>
+                  <condition><![CDATA[SELECT Announcement WHERE end_date < NOW() OR (ISNULL(end_date) AND status = 'inactive')]]></condition>
+                </group>
+              </groups>
+            </tabs>
+          </grouping>
+        </brick>
+      </bricks>
+      <forms>
+        <form id="announcement-view" _delta="define">
+          <class>Announcement</class>
+          <fields>
+            <field id="description"/>
+          </fields>
+          <modes>
+            <mode id="view"/>
+          </modes>
+        </form>
+      </forms>
+      <classes>
+        <class id="Announcement" _delta="define">
+          <scopes>
+            <scope id="all">
+              <oql_view><![CDATA[SELECT Announcement AS a JOIN lnkAnnouncementToCustomer AS lnk ON lnk.announcement_id = a.id WHERE lnk.customer_org_id = :current_contact->org_id]]></oql_view>
+            </scope>
+          </scopes>
+        </class>
+      </classes>
+    </module_design>
+  </module_designs>
+</itop_design>
+

@@ -1,0 +1,41 @@
+.home .alert {
+    margin-bottom: 8px;
+    padding: 1em 1em;
+    white-space: normal;
+}
+
+.home .alert p {
+    white-space: pre-line;
+}
+
+.home .alerts {
+    margin-bottom: 8px;
+}
+
+@media (min-width: 768px) {
+    .home .alert {
+        padding: 30px 40px;
+    }
+    .home .alerts {
+        margin-bottom: 25px;
+    }
+}
+
+@media (min-width: 992px) {
+    .home .alert {
+        padding: 30px 40px;
+    }
+    .home .alerts {
+        margin-bottom: 25px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .home .alert {
+        padding: 30px 50px;
+    }
+    .home .alerts {
+        margin-bottom: 40px;
+    }
+}
+

@@ -1,0 +1,10 @@
+{% block pTileWrapper %}
+	<div class="col-xs-12 col-sm-{{ brick.GetWidth }} alerts">
+        {% for announcement in brick.GetAnnouncements(app) %}
+			<div class="alert alert-{{ announcement.type }}" role="alert">
+				<strong>{{ announcement.title }}</strong>
+				<p>{{ announcement.text }}</p>
+			</div>
+        {% endfor %}
+	</div>
+{% endblock %}
