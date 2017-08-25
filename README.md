@@ -11,15 +11,15 @@
 
 ![create_announcement](images/create_announcement.png)
 
-В разделе Объявления (Announcements) на портале пользователю доступны снятые с показа объявления.
+В разделе Объявления (Announcements) на портале пользователю могут быть доступны снятые с показа объявления.
 
 ![announcement_history](images/announcement_history.png)
 
-Отдельный раздел c объявлениями можно отключить. Для этого перед установкой модуля нужно деактивировать раздел `id="announcements-history"` в файле *datamodel.knowitop-portal-announcement.xml*:
+Чтобы включить раздел Объявления на портале, перед установкой модуля нужно активировать раздел `id="announcements-history"` в файле *datamodel.knowitop-portal-announcement.xml*:
  
 ```
 <brick id="announcements-history" xsi:type="Combodo\iTop\Portal\Brick\ManageBrick" _delta="define">
-  <active>true</active> <--- заменить true на false
+  <active>false</active> <--- заменить false на true
   ...
 </brick>
 ```

@@ -67,7 +67,6 @@
           <sql>status</sql>
           <default_value>active</default_value>
           <is_null_allowed>false</is_null_allowed>
-          <display_style>radio_vertical</display_style>
         </field>
         <field id="message_type" xsi:type="AttributeEnum">
           <values>
@@ -79,7 +78,6 @@
           <sql>message_type</sql>
           <default_value>message_info</default_value>
           <is_null_allowed>false</is_null_allowed>
-          <display_style>radio_vertical</display_style>
         </field>
         <field id="customers_list" xsi:type="AttributeLinkedSetIndirect">
           <linked_class>lnkAnnouncementToCustomer</linked_class>
@@ -297,7 +295,7 @@
           <oql><![CDATA[SELECT Announcement AS a WHERE (a.start_date <= NOW() OR ISNULL(a.start_date)) AND (a.end_date >= NOW() OR ISNULL(a.end_date)) AND a.status = 'active']]></oql>
         </brick>
         <brick id="announcements-history" xsi:type="Combodo\iTop\Portal\Brick\ManageBrick" _delta="define">
-          <active>true</active>
+          <active>false</active>
           <rank>
             <navigation_menu>100</navigation_menu>
           </rank>
